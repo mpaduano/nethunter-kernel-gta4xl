@@ -17,7 +17,7 @@ jobs:
 
       - name: Clone Kernel Source
         run: |
-          git clone --depth=1 -b lineage-23.2 https://github.com/LineageOS/android_kernel_samsung_gta4xl.git $GITHUB_WORKSPACE/kernel
+          git clone --depth=1 -b lineage-22.2 https://github.com/LineageOS/android_kernel_samsung_gta4xl.git $GITHUB_WORKSPACE/kernel
 
       - name: Pre-Build Header Patches
         run: |
