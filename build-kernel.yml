@@ -19,7 +19,7 @@ jobs:
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y bc bison build-essential flex libssl-dev libcrypto++-dev cccl ccache libncurses-dev git zip unzip curl libgmp-dev libmpfr-dev libmpc-dev llvm
+          sudo apt-get install -y bc bison build-essential flex libssl-dev libcrypto++-dev cccl ccache libncurses-dev git zip unzip curl libgmp-dev libmpfr-dev libmpc-dev llvm lld
 
       - name: Download Clang Compiler Toolchain
         run: |
