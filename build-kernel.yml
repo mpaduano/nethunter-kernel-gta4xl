@@ -25,13 +25,13 @@ jobs:
         run: |
           mkdir -p $GITHUB_WORKSPACE/toolchain
           cd $GITHUB_WORKSPACE/toolchain
-          curl -LO https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r383902.tar.gz
-          tar -xzf clang-r383902.tar.gz
-          rm clang-r383902.tar.gz
+          curl -LO https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r383902b.tar.gz
+          tar -xzf clang-r383902b.tar.gz
+          rm clang-r383902b.tar.gz
 
       - name: Clone Kernel Source
         run: |
-          git clone --depth=1 -b lineage-21 https://github.com/LineageOS/android_kernel_samsung_gta4xl.git $GITHUB_WORKSPACE/kernel
+          git clone --depth=1 -b lineage-22.2 https://github.com/LineageOS/android_kernel_samsung_gta4xl.git $GITHUB_WORKSPACE/kernel
 
       - name: Inject Overclock & Overvolt Parameters
         run: |
