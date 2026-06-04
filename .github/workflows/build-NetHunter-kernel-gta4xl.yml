@@ -50,7 +50,7 @@ jobs:
           export CLANG_TRIPLE=aarch64-linux-gnu-
           
           # Configure
-          make ARCH=arm64 exynos9611_defconfig
+          make ARCH=arm64 exynos9611-gta4xlwifi_defconfig
           
           # KCFLAGS: 
           # -std=gnu89: Forces the compiler to use the older standard that matches your kernel source
