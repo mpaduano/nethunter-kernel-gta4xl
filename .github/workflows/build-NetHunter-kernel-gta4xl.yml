@@ -1,4 +1,4 @@
-name: Build Overclocked Nethunter Kernel (Android 16)
+name: Build Overclocked Nethunter Kernel (Android 15)
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y bc bison build-essential flex libssl-dev libcrypto++-dev ccache libncurses-dev git zip unzip curl libgmp-dev libmpfr-dev libmpc-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf clang-19 lld llvm
+          sudo apt-get install -y bc bison build-essential flex libssl-dev libcrypto++-dev ccache libncurses-dev git zip unzip curl libgmp-dev libmpfr-dev libmpc-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi
 
       - name: Clone Kernel Source
         run: |
@@ -69,8 +69,14 @@ jobs:
           # Build
           make -j$(nproc) ARCH=arm64
 
+      - name: Check Build Output
+        run: |
+          echo "Checking for compiled kernel images..."
+          ls -lah $GITHUB_WORKSPACE/kernel/arch/arm64/boot/
+          find $GITHUB_WORKSPACE/kernel/arch/arm64/boot/ -type f -name "Image*"
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Android-16-Kernel-Build
-          path: kernel/arch/arm64/boot/Image.gz-dtb
+          name: Android-15-Kernel-Build
+          path: kernel/arch/arm64/boot/Image*
