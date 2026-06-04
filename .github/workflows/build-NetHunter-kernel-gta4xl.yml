@@ -19,6 +19,14 @@ jobs:
         run: |
           git clone --depth=1 -b lineage-22.2 https://github.com/LineageOS/android_kernel_samsung_gta4xl.git $GITHUB_WORKSPACE/kernel
 
+      - name: Disable tzdev Driver
+        run: |
+          cd $GITHUB_WORKSPACE/kernel
+          # Disable tzdev driver to avoid missing firmware file errors
+          if [ -f arch/arm64/configs/exynos9611-gta4xlwifi_defconfig ]; then
+            sed -i 's/CONFIG_TZDEV=y/CONFIG_TZDEV=n/g' arch/arm64/configs/exynos9611-gta4xlwifi_defconfig
+          fi
+
       - name: Pre-Build Header Patches
         run: |
           cd $GITHUB_WORKSPACE/kernel
