@@ -25,9 +25,9 @@ jobs:
         run: |
           mkdir -p $GITHUB_WORKSPACE/toolchain
           cd $GITHUB_WORKSPACE/toolchain
-          curl -LO https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r383902b.tar.gz
-          tar -xzf clang-r383902b.tar.gz
-          rm clang-r383902b.tar.gz
+          curl -LO https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r383902.tar.gz
+          tar -xzf clang-r383902.tar.gz
+          rm clang-r383902.tar.gz
 
       - name: Clone Kernel Source
         run: |
