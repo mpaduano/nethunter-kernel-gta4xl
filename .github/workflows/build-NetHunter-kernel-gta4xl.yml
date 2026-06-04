@@ -13,19 +13,11 @@ jobs:
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y bc bison build-essential flex libssl-dev libcrypto++-dev ccache libncurses-dev git zip unzip curl libgmp-dev libmpfr-dev libmpc-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi clang lld llvm
+          sudo apt-get install -y bc bison build-essential flex libssl-dev libcrypto++-dev ccache libncurses-dev git zip unzip curl libgmp-dev libmpfr-dev libmpc-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf clang-19 lld-19 llvm-19
 
       - name: Clone Kernel Source
         run: |
           git clone --depth=1 -b lineage-22.2 https://github.com/LineageOS/android_kernel_samsung_gta4xl.git $GITHUB_WORKSPACE/kernel
-
-      - name: Disable tzdev Driver
-        run: |
-          cd $GITHUB_WORKSPACE/kernel
-          # Disable tzdev driver to avoid missing firmware file errors
-          if [ -f arch/arm64/configs/exynos9611-gta4xlwifi_defconfig ]; then
-            sed -i 's/CONFIG_TZDEV=y/CONFIG_TZDEV=n/g' arch/arm64/configs/exynos9611-gta4xlwifi_defconfig
-          fi
 
       - name: Pre-Build Header Patches
         run: |
@@ -34,6 +26,14 @@ jobs:
           sed -i 's/static inline void void/static inline void/g' include/linux/nmi.h
           # 2. Add ZONE_DMA to mmzone.h to fix compilation error
           sed -i '/#define _LINUX_MMZONE_H/a #define ZONE_DMA 0' include/linux/mmzone.h
+
+      - name: Disable tzdev Driver
+        run: |
+          cd $GITHUB_WORKSPACE/kernel
+          # Disable tzdev driver to avoid missing firmware file errors
+          if [ -f arch/arm64/configs/exynos9611-gta4xlwifi_defconfig ]; then
+            sed -i 's/CONFIG_TZDEV=y/CONFIG_TZDEV=n/g' arch/arm64/configs/exynos9611-gta4xlwifi_defconfig
+          fi
 
       - name: Inject Overclock
         run: |
